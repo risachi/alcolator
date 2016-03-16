@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,27 +18,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMe-xn-W1p">
-                                <rect key="frame" x="77" y="84" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMe-xn-W1p">
+                                <rect key="frame" x="231" y="96" width="138" height="30"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
+                                <state key="normal" title="Calculate!">
+                                    <color key="titleColor" red="1" green="0.68643208609999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hld-oD-2AQ">
-                                <rect key="frame" x="77" y="165" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2KW-ri-yKg">
-                                <rect key="frame" x="77" y="211" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="% Alcohol Content per Beer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2KW-ri-yKg">
+                                <rect key="frame" x="20" y="20" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="APc-Jc-daC">
-                                <rect key="frame" x="75" y="285" width="118" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="APc-Jc-daC">
+                                <rect key="frame" x="18" y="58" width="564" height="31"/>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hld-oD-2AQ">
+                                <rect key="frame" x="5" y="191" width="560" height="26"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="2KW-ri-yKg" secondAttribute="trailing" id="7wb-Ef-MfL"/>
+                            <constraint firstItem="APc-Jc-daC" firstAttribute="top" secondItem="2KW-ri-yKg" secondAttribute="bottom" constant="8" id="ADP-Hh-tcw"/>
+                            <constraint firstItem="APc-Jc-daC" firstAttribute="width" secondItem="2KW-ri-yKg" secondAttribute="width" id="FyP-hn-xdl"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="2KW-ri-yKg" secondAttribute="leading" id="NmX-CU-zpw"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="BMe-xn-W1p" secondAttribute="bottom" constant="15" id="SVp-rn-vSB"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="BMe-xn-W1p" secondAttribute="bottom" constant="50" id="W6Q-8m-R1T"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hld-oD-2AQ" secondAttribute="trailing" constant="15" id="Ye3-A0-FFQ"/>
+                            <constraint firstItem="BMe-xn-W1p" firstAttribute="top" secondItem="APc-Jc-daC" secondAttribute="bottom" constant="8" id="kWK-WQ-sGX"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="hld-oD-2AQ" secondAttribute="leading" constant="15" id="qsA-Bz-cbc"/>
+                            <constraint firstItem="BMe-xn-W1p" firstAttribute="centerX" secondItem="APc-Jc-daC" secondAttribute="centerX" id="y0R-D5-awc"/>
+                            <constraint firstItem="2KW-ri-yKg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="yDc-7s-RjT"/>
+                            <constraint firstItem="APc-Jc-daC" firstAttribute="centerX" secondItem="2KW-ri-yKg" secondAttribute="centerX" id="yvH-Xj-JQQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SVp-rn-vSB"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="puo-AH-GoU" appends="YES" id="FLW-yl-npL"/>
                         </connections>
@@ -46,6 +69,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="puo-AH-GoU"/>
             </objects>
+            <point key="canvasLocation" x="305" y="387"/>
         </scene>
     </scenes>
 </document>
