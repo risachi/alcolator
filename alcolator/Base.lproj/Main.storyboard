@@ -33,8 +33,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="APc-Jc-daC">
                                 <rect key="frame" x="18" y="58" width="564" height="31"/>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hld-oD-2AQ">
-                                <rect key="frame" x="5" y="191" width="560" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="???" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hld-oD-2AQ">
+                                <rect key="frame" x="231" y="240" width="138" height="30"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -45,20 +45,29 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="2KW-ri-yKg" secondAttribute="trailing" id="7wb-Ef-MfL"/>
                             <constraint firstItem="APc-Jc-daC" firstAttribute="top" secondItem="2KW-ri-yKg" secondAttribute="bottom" constant="8" id="ADP-Hh-tcw"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="width" secondItem="BMe-xn-W1p" secondAttribute="width" id="DUd-oB-Mtm"/>
                             <constraint firstItem="APc-Jc-daC" firstAttribute="width" secondItem="2KW-ri-yKg" secondAttribute="width" id="FyP-hn-xdl"/>
                             <constraint firstAttribute="leadingMargin" secondItem="2KW-ri-yKg" secondAttribute="leading" id="NmX-CU-zpw"/>
                             <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="BMe-xn-W1p" secondAttribute="bottom" constant="15" id="SVp-rn-vSB"/>
                             <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="BMe-xn-W1p" secondAttribute="bottom" constant="50" id="W6Q-8m-R1T"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hld-oD-2AQ" secondAttribute="trailing" constant="15" id="Ye3-A0-FFQ"/>
                             <constraint firstItem="BMe-xn-W1p" firstAttribute="top" secondItem="APc-Jc-daC" secondAttribute="bottom" constant="8" id="kWK-WQ-sGX"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="width" secondItem="BMe-xn-W1p" secondAttribute="width" id="mCx-mE-7wD"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hld-oD-2AQ" secondAttribute="leading" constant="15" id="qsA-Bz-cbc"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="220" id="sUS-vs-7CQ"/>
+                            <constraint firstItem="hld-oD-2AQ" firstAttribute="top" secondItem="BMe-xn-W1p" secondAttribute="bottom" constant="114" id="vYp-Wu-p2i"/>
                             <constraint firstItem="BMe-xn-W1p" firstAttribute="centerX" secondItem="APc-Jc-daC" secondAttribute="centerX" id="y0R-D5-awc"/>
                             <constraint firstItem="2KW-ri-yKg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="yDc-7s-RjT"/>
                             <constraint firstItem="APc-Jc-daC" firstAttribute="centerX" secondItem="2KW-ri-yKg" secondAttribute="centerX" id="yvH-Xj-JQQ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="DUd-oB-Mtm"/>
                                 <exclude reference="SVp-rn-vSB"/>
+                                <exclude reference="W6Q-8m-R1T"/>
+                                <exclude reference="Ye3-A0-FFQ"/>
+                                <exclude reference="qsA-Bz-cbc"/>
+                                <exclude reference="sUS-vs-7CQ"/>
                             </mask>
                         </variation>
                         <connections>
