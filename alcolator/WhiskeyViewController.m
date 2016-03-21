@@ -14,6 +14,26 @@
 
 @implementation WhiskeyViewController
 
+float numberOfWhiskeyGlassesForEquivalentAlcoholAmount = 0;
+NSString *resultText = @"";
+NSString *navResultText = @"";
+
+- (void)recalculate {
+    
+}
+
+- (IBAction)sliderValueDidChange:(UISlider *)sender {
+    NSLog(@"Slider value changed to %f", sender.value);
+    [self.beerPercentTextField resignFirstResponder];
+    
+    NSLog(@"%f", numberOfWhiskeyGlassesForEquivalentAlcoholAmount);
+    
+    [self recalculate];
+    self.resultLabel.text = resultText;
+    self.navigationItem.title = navResultText;
+    
+}
+
 - (void)buttonPressed:(UIButton *)sender;
 {
     [self.beerPercentTextField resignFirstResponder];
