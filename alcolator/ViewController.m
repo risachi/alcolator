@@ -14,10 +14,6 @@
 
 @implementation ViewController
 
-float numberOfWineGlassesForEquivalentAlcoholAmount = 0;
-NSString *resultText = @"";
-NSString *navResultText = @"";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -26,6 +22,22 @@ NSString *navResultText = @"";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (float)alcoholPercentage {
+    return 0.13f;
+}
+
+- (float)ouncesPerGlass {
+    return 5;
+}
+
+- (NSString *)pluralize:(int)number {
+    return number == 1 ? NSLocalizedString(@"glass", @"singular glass") : NSLocalizedString(@"glasses", @"plural of glass");
+}
+
+- (NSString *)alcoholName {
+    return @"wine";
 }
 
 - (void)recalculate {
@@ -37,10 +49,10 @@ NSString *navResultText = @"";
     float ouncesOfAlcoholPerBeer = ouncesInOneBeerGlass * alcoholPercentageOfBeer;
     float ouncesOfAlcoholTotal = ouncesOfAlcoholPerBeer * numberOfBeers;
     // now, calculate the equivalent amount of wine...
-    float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
-    float alcoholPercentageOfWine = 0.13;  // 13% is average
+    float ouncesInOneWineGlass = [self ouncesPerGlass];  // wine glasses are usually 5oz
+    float alcoholPercentageOfWine = [self alcoholPercentage];  // 13% is average
     float ouncesOfAlcoholPerWineGlass = ouncesInOneWineGlass * alcoholPercentageOfWine;
-    numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+    float numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
     
     // decide whether to use "beer"/"beers" and "glass"/"glasses"
     NSString *beerText;
@@ -49,15 +61,13 @@ NSString *navResultText = @"";
     } else {
         beerText = NSLocalizedString(@"beers", @"plural of beer");
     }
-    NSString *wineText;
-    if (numberOfWineGlassesForEquivalentAlcoholAmount == 1) {
-        wineText = NSLocalizedString(@"glass", @"singular glass");
-    } else {
-        wineText = NSLocalizedString(@"glasses", @"plural of glass");
-    }
+    NSString *wineText = [self pluralize:numberOfWineGlassesForEquivalentAlcoholAmount];
     // generate the result text, and display it on the label
-    resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of wine.", nil), numberOfBeers, beerText,  [self.beerPercentTextField.text floatValue], numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
-    navResultText = [NSString stringWithFormat:NSLocalizedString(@"Wine (%.1f %@)", nil), numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
+    NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of %@.", nil), numberOfBeers, beerText,  [self.beerPercentTextField.text floatValue], numberOfWineGlassesForEquivalentAlcoholAmount, wineText, [self alcoholName]];
+    NSString *navResultText = [NSString stringWithFormat:NSLocalizedString(@"%@ (%.1f %@)", nil), [self alcoholName], numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
+    
+    self.resultLabel.text = resultText;
+    self.navigationItem.title = navResultText;
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)sender {
@@ -67,24 +77,19 @@ NSString *navResultText = @"";
         // The user typed 0, or something that's not a number, so clear the field
         sender.text = nil;
     }
+    [self recalculate];
 }
 
 - (IBAction)sliderValueDidChange:(UISlider *)sender {
     NSLog(@"Slider value changed to %f", sender.value);
+    
     [self.beerPercentTextField resignFirstResponder];
-
-    NSLog(@"%f", numberOfWineGlassesForEquivalentAlcoholAmount);
     
     [self recalculate];
-    self.resultLabel.text = resultText;
-    self.navigationItem.title = navResultText;
-    
 }
 
 - (IBAction)buttonPressed:(UIButton *)sender {
     [self recalculate];
-    self.resultLabel.text = resultText;
-    self.navigationItem.title = navResultText;
 }
 
 - (IBAction)tapGestureDidFire:(UITapGestureRecognizer *)sender {
