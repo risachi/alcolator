@@ -16,5 +16,10 @@
 
 - (void)buttonPressed:(UIButton *)sender;
 
+- (float)alcoholPercentage;
+- (float)ouncesPerGlass;
+- (NSString *)pluralize:(int)number;
+- (NSString *)alcoholName;
+
 @end
 

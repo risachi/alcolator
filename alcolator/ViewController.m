@@ -14,9 +14,7 @@
 
 @implementation ViewController
 
-float numberOfWineGlassesForEquivalentAlcoholAmount = 0;
-int wholeNumber = 0;
-NSString *resultText = @"";
+NSInteger wholeNumber = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,19 +26,38 @@ NSString *resultText = @"";
     // Dispose of any resources that can be recreated.
 }
 
+- (float)alcoholPercentage {
+    return 0.13f;
+}
+
+- (float)ouncesPerGlass {
+    return 5;
+}
+
+- (NSString *)pluralize:(int)number {
+    return number ==1 ? NSLocalizedString(@"glass", @"singular glass") : NSLocalizedString(@"glasses", @"plural of glass");
+}
+
+- (NSString *)alcoholName {
+    return @"wine";
+}
+
 - (void)recalculate {
     [self.beerPercentTextField resignFirstResponder];
+    
     // first, calculate how much alcohol is in all those beers...
     int numberOfBeers = self.beerCountSlider.value;
     int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
     float alcoholPercentageOfBeer = [self.beerPercentTextField.text floatValue] / 100;
     float ouncesOfAlcoholPerBeer = ouncesInOneBeerGlass * alcoholPercentageOfBeer;
     float ouncesOfAlcoholTotal = ouncesOfAlcoholPerBeer * numberOfBeers;
+    
     // now, calculate the equivalent amount of wine...
-    float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
-    float alcoholPercentageOfWine = 0.13;  // 13% is average
-    float ouncesOfAlcoholPerWineGlass = ouncesInOneWineGlass * alcoholPercentageOfWine;
-    numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+//    float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
+//    float alcoholPercentageOfWine = 0.13;  // 13% is average
+    float ouncesOfAlcoholPerWineGlass = [self ouncesPerGlass] * [self alcoholPercentage];
+    float numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+    
     // decide whether to use "beer"/"beers" and "glass"/"glasses"
     NSString *beerText;
     if (numberOfBeers == 1) {
@@ -48,14 +65,11 @@ NSString *resultText = @"";
     } else {
         beerText = NSLocalizedString(@"beers", @"plural of beer");
     }
-    NSString *wineText;
-    if (numberOfWineGlassesForEquivalentAlcoholAmount == 1) {
-        wineText = NSLocalizedString(@"glass", @"singular glass");
-    } else {
-        wineText = NSLocalizedString(@"glasses", @"plural of glass");
-    }
+    NSString *wineText = [self pluralize:numberOfWineGlassesForEquivalentAlcoholAmount];
     // generate the result text, and display it on the label
-    resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of wine.", nil), numberOfBeers, beerText,  [self.beerPercentTextField.text floatValue], numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
+    NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of %@.", nil), numberOfBeers, beerText,  [self.beerPercentTextField.text floatValue], numberOfWineGlassesForEquivalentAlcoholAmount, wineText, [self alcoholName]];
+    
+    self.resultLabel.text = resultText;
     
     wholeNumber = (int) numberOfWineGlassesForEquivalentAlcoholAmount;
 }
@@ -67,18 +81,18 @@ NSString *resultText = @"";
         // The user typed 0, or something that's not a number, so clear the field
         sender.text = nil;
     }
+    [self recalculate];
 }
 
 - (IBAction)sliderValueDidChange:(UISlider *)sender {
-    [self recalculate];
     NSLog(@"Slider value changed to %f", sender.value);
     [self.beerPercentTextField resignFirstResponder];
-    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) wholeNumber]];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int)wholeNumber]];
+    [self recalculate];
 }
 
 - (IBAction)buttonPressed:(UIButton *)sender {
     [self recalculate];
-    self.resultLabel.text = resultText;
     [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) wholeNumber]];
 }
 
